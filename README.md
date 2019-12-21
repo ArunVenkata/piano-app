@@ -1,6 +1,9 @@
 # piano-app
 
+## Prerequisites
+* virtualenv
+* python 3.7
 ## Procedure
-* Activate Virtual environment using ```source venv/bin/activate```
+* Setup using ```bash init.sh``` (*Linux only*)
 * Run App using ```python manage.py runserver```
 
