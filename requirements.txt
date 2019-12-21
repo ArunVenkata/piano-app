@@ -1,0 +1,4 @@
+Django
+requests
+pendulum
+jinja2
