@@ -1,7 +1,13 @@
-from django.shortcuts import render
-from django.http import HttpResponse as Response
+from django.views.generic import CreateView, TemplateView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from pages.forms import CustomUserCreationForm
 
-# Create your views here.
 
-def home_view(request, *args, **kwargs):
-    return render(request, "piano_layout.html")
+class SignupView(CreateView):
+    form_class = CustomUserCreationForm
+    template_name = "registration/signup.html"
+    success_url = "/"
+
+
+class HomeView(LoginRequiredMixin, TemplateView):
+    template_name = 'piano_layout.html'
