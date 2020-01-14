@@ -1,0 +1,18 @@
+{% include "header.html" %}
+	<title>The Sound Of Music</title>
+</head>
+<body>
+
+{% include "main_navbar.html" %}
+
+<div id="doc-loader">
+	<div id="inner-doc"></div>
+</div>
+
+<script type="text/javascript">
+    $("#nav-btn-signup, #nav-link-signup").click(function (e) {
+        window.location.href = "/signup"
+    })
+</script>
+
+{% include "footer.html" %}

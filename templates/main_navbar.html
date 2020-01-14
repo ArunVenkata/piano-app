@@ -1,0 +1,30 @@
+<!-- Navbar Begin -->
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+        <img src="{{ static('images/headphones.svg') }}" width="45" height="45" class="d-inline-block" alt="">
+        <span class="nav-font p-3 align-middle">Sound Of Music</span></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav left-nav">
+            <a class="nav-item nav-link" href="#">Text1</a>
+            <a class="nav-item nav-link" href="#">Text2</a>
+        </div>
+        <div class="navbar-nav right-nav">
+            {% if request.user.is_authenticated %}
+                <p class="align-middle nav-item m-0">Hello, {{ request.user.username }}</p>
+            {% else %}
+                <a class="nav-item nav-link" href="/login"><span id="nav-login">Login</span></a>
+                <a class="nav-item nav-link" id="nav-link-signup" href="/signup">Sign Up</a>
+                <button class="btn btn-purple nav-item nav-link" id="nav-btn-signup" onclick="window.location.href='/signup'">Sign Up</button>
+
+            {% endif %}
+        </div>
+
+
+    </div>
+</nav>
+<!-- Navbar End -->

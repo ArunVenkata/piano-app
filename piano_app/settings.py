@@ -127,4 +127,4 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 # Registration Settings
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/app'
