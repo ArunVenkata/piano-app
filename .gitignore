@@ -2,3 +2,4 @@ venv/
 *.pyc
 settings.json
 db.sqlite3
+!media/new.wav

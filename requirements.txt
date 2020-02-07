@@ -1,4 +1,7 @@
+djangorestframework
 Django
+ffmpeg
 requests
 pendulum
+pydub
 jinja2

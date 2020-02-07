@@ -5,7 +5,10 @@
 
 
 {% block user_main_piano %}
-    <section id="wrap">
+    <button onclick="startRecording();">Record</button>
+    <button onclick="stopRecording();">Stop</button>
+    <button onclick="save('{{ csrf_token }}');">Save</button>
+    <section id="wrap">1
         <header>
             <h1>Piano</h1>
             <h2>Use your keyboard. Hover for hints.</h2>
@@ -66,23 +69,23 @@
                 </div>
             </div>
 
-            <audio data-key="65" src="{{ static('sounds/40.wav')}}"></audio>
-            <audio data-key="87" src="{{ static('sounds/41.wav')}}"></audio>
-            <audio data-key="83" src="{{ static('sounds/42.wav')}}"></audio>
-            <audio data-key="69" src="{{ static('sounds/43.wav')}}"></audio>
-            <audio data-key="68" src="{{ static('sounds/44.wav')}}"></audio>
-            <audio data-key="70" src="{{ static('sounds/45.wav')}}"></audio>
-            <audio data-key="84" src="{{ static('sounds/46.wav')}}"></audio>
-            <audio data-key="71" src="{{ static('sounds/47.wav')}}"></audio>
-            <audio data-key="89" src="{{ static('sounds/48.wav')}}"></audio>
-            <audio data-key="72" src="{{ static('sounds/49.wav')}}"></audio>
-            <audio data-key="85" src="{{ static('sounds/50.wav')}}"></audio>
-            <audio data-key="74" src="{{ static('sounds/51.wav')}}"></audio>
-            <audio data-key="75" src="{{ static('sounds/52.wav')}}"></audio>
-            <audio data-key="79" src="{{ static('sounds/53.wav')}}"></audio>
-            <audio data-key="76" src="{{ static('sounds/54.wav')}}"></audio>
-            <audio data-key="80" src="{{ static('sounds/55.wav')}}"></audio>
-            <audio data-key="186" src="{{ static('sounds/56.wav')}}"></audio>
+            <audio data-key="65" data-audio="40" src="{{ static('sounds/40.wav')}}"></audio>
+            <audio data-key="87" data-audio="41" src="{{ static('sounds/41.wav')}}"></audio>
+            <audio data-key="83" data-audio="42" src="{{ static('sounds/42.wav')}}"></audio>
+            <audio data-key="69" data-audio="43" src="{{ static('sounds/43.wav')}}"></audio>
+            <audio data-key="68" data-audio="44" src="{{ static('sounds/44.wav')}}"></audio>
+            <audio data-key="70" data-audio="45" src="{{ static('sounds/45.wav')}}"></audio>
+            <audio data-key="84" data-audio="46" src="{{ static('sounds/46.wav')}}"></audio>
+            <audio data-key="71" data-audio="47" src="{{ static('sounds/47.wav')}}"></audio>
+            <audio data-key="89" data-audio="48" src="{{ static('sounds/48.wav')}}"></audio>
+            <audio data-key="72" data-audio="49" src="{{ static('sounds/49.wav')}}"></audio>
+            <audio data-key="85" data-audio="50" src="{{ static('sounds/50.wav')}}"></audio>
+            <audio data-key="74" data-audio="51" src="{{ static('sounds/51.wav')}}"></audio>
+            <audio data-key="75" data-audio="52" src="{{ static('sounds/52.wav')}}"></audio>
+            <audio data-key="79" data-audio="53" src="{{ static('sounds/53.wav')}}"></audio>
+            <audio data-key="76" data-audio="54" src="{{ static('sounds/54.wav')}}"></audio>
+            <audio data-key="80" data-audio="55" src="{{ static('sounds/55.wav')}}"></audio>
+            <audio data-key="186" data-audio="56" src="{{ static('sounds/56.wav')}}"></audio>
         </section>
     </section>
 

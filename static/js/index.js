@@ -8,9 +8,39 @@ onkeydown = onkeyup = function(e) {
     /* insert conditional here */
 }
 
+var record = {}, startRecordingTime, isRecording = false; //Recording Variables
+
+function startRecording() {
+    record = {'Keys':{}}, isRecording = true;
+    startRecordingTime = Date.now();
+}
+
+function stopRecording() {
+    record.TotalTime = Date.now() - startRecordingTime;
+    isRecording = false;
+    console.log(record);
+}
+
+function save(csrf_token) {
+    $.ajax({
+            headers: { "X-CSRFToken": csrf_token },
+            url: '/api/record',
+            type: 'post',
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                console.log(data)
+            },
+            data: JSON.stringify(record),
+        });
+}
+
 function playNote(e) {
     const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`),
         key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+
+    //Record sound File with time
+    if (isRecording) record['Keys'][Date.now() - startRecordingTime] = audio.dataset.audio;
 
     if (!key) return;
 
