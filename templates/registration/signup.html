@@ -1,8 +1,14 @@
-{% include "header.html" %}
+{% extends "index.html" %}
+
+{% block sign_up_head %}
+
 <title>Signup</title>
+{% endblock %}
+{% block signup_styles %}{% endblock %}
 </head>
 <body>
-{% include "main_navbar.html" %}
+{% block signup_form %}
+
 <div class="card mr-auto ml-auto mb-5" style="box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">
     <h4 class="card-title mr-auto ml-auto mt-4" style="font-family: 'Raleway', sans-serif; font-weight: 500;">
         Welcome!
@@ -40,4 +46,4 @@
 
     </div>
 </div>
-{% include "footer.html" %}
+{% endblock %}

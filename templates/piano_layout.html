@@ -1,16 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "index.html" %}
+{% block user_main_head_content %}
+    <link rel="stylesheet" href="{{ static('css/styles.css') }}">
+{% endblock %}
 
-<head>
-    <meta charset="UTF-8">
-    <title>Piano Layout</title>
-    <link rel="stylesheet" href="{{ static('styles.css') }}">
-</head>
 
-<body>
+{% block user_main_piano %}
     <section id="wrap">
         <header>
-            <h1>JS Piano</h1>
+            <h1>Piano</h1>
             <h2>Use your keyboard. Hover for hints.</h2>
         </header>
         <section id="main">
@@ -69,26 +66,28 @@
                 </div>
             </div>
 
-            <audio data-key="65" src="http://carolinegabriel.com/demo/js-keyboard/sounds/040.wav"></audio>
-            <audio data-key="87" src="http://carolinegabriel.com/demo/js-keyboard/sounds/041.wav"></audio>
-            <audio data-key="83" src="http://carolinegabriel.com/demo/js-keyboard/sounds/042.wav"></audio>
-            <audio data-key="69" src="http://carolinegabriel.com/demo/js-keyboard/sounds/043.wav"></audio>
-            <audio data-key="68" src="http://carolinegabriel.com/demo/js-keyboard/sounds/044.wav"></audio>
-            <audio data-key="70" src="http://carolinegabriel.com/demo/js-keyboard/sounds/045.wav"></audio>
-            <audio data-key="84" src="http://carolinegabriel.com/demo/js-keyboard/sounds/046.wav"></audio>
-            <audio data-key="71" src="http://carolinegabriel.com/demo/js-keyboard/sounds/047.wav"></audio>
-            <audio data-key="89" src="http://carolinegabriel.com/demo/js-keyboard/sounds/048.wav"></audio>
-            <audio data-key="72" src="http://carolinegabriel.com/demo/js-keyboard/sounds/049.wav"></audio>
-            <audio data-key="85" src="http://carolinegabriel.com/demo/js-keyboard/sounds/050.wav"></audio>
-            <audio data-key="74" src="http://carolinegabriel.com/demo/js-keyboard/sounds/051.wav"></audio>
-            <audio data-key="75" src="http://carolinegabriel.com/demo/js-keyboard/sounds/052.wav"></audio>
-            <audio data-key="79" src="http://carolinegabriel.com/demo/js-keyboard/sounds/053.wav"></audio>
-            <audio data-key="76" src="http://carolinegabriel.com/demo/js-keyboard/sounds/054.wav"></audio>
-            <audio data-key="80" src="http://carolinegabriel.com/demo/js-keyboard/sounds/055.wav"></audio>
-            <audio data-key="186" src="http://carolinegabriel.com/demo/js-keyboard/sounds/056.wav"></audio>
+            <audio data-key="65" src="{{ static('sounds/40.wav')}}"></audio>
+            <audio data-key="87" src="{{ static('sounds/41.wav')}}"></audio>
+            <audio data-key="83" src="{{ static('sounds/42.wav')}}"></audio>
+            <audio data-key="69" src="{{ static('sounds/43.wav')}}"></audio>
+            <audio data-key="68" src="{{ static('sounds/44.wav')}}"></audio>
+            <audio data-key="70" src="{{ static('sounds/45.wav')}}"></audio>
+            <audio data-key="84" src="{{ static('sounds/46.wav')}}"></audio>
+            <audio data-key="71" src="{{ static('sounds/47.wav')}}"></audio>
+            <audio data-key="89" src="{{ static('sounds/48.wav')}}"></audio>
+            <audio data-key="72" src="{{ static('sounds/49.wav')}}"></audio>
+            <audio data-key="85" src="{{ static('sounds/50.wav')}}"></audio>
+            <audio data-key="74" src="{{ static('sounds/51.wav')}}"></audio>
+            <audio data-key="75" src="{{ static('sounds/52.wav')}}"></audio>
+            <audio data-key="79" src="{{ static('sounds/53.wav')}}"></audio>
+            <audio data-key="76" src="{{ static('sounds/54.wav')}}"></audio>
+            <audio data-key="80" src="{{ static('sounds/55.wav')}}"></audio>
+            <audio data-key="186" src="{{ static('sounds/56.wav')}}"></audio>
         </section>
     </section>
-    <script src="{{ static('index.js') }}"></script>
-</body>
 
-</html>
+{% endblock %}
+
+{% block user_main_body_scripts %}
+    <script src="{{ static('js/index.js') }}"></script>
+{% endblock %}
