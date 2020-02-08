@@ -1,5 +1,6 @@
-from django.views.generic import CreateView, TemplateView
+from django.views.generic import CreateView, View, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import redirect, render
 from pages.forms import CustomUserCreationForm
 from pages.util import render_audio
 from pages.models import Record
@@ -14,12 +15,21 @@ class SignupView(CreateView):
     success_url = "/app"
 
 
-class HomeView(LoginRequiredMixin, TemplateView):
+class HomeView(View):
+
+    @staticmethod
+    def get(request):
+        if request.user.is_authenticated:
+            return redirect('piano')
+        else:
+            return render(request, 'index.html')
+
+
+class PianoView(LoginRequiredMixin, TemplateView):
     template_name = 'piano_layout.html'
 
 
 class RecordAPI(APIView):
-
     permission_classes = (IsAuthenticated,)
 
     @staticmethod
