@@ -7,7 +7,7 @@
 {% block user_main_piano %}
     <button onclick="startRecording();">Record</button>
     <button onclick="stopRecording();">Stop</button>
-    <button onclick="save('{{ csrf_token }}');">Save</button>
+    <button onclick="save('{{ csrf_token }}', 'myfile');">Save</button>
     <section id="wrap">1
         <header>
             <h1>Piano</h1>

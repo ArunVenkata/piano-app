@@ -21,7 +21,8 @@ function stopRecording() {
     console.log(record);
 }
 
-function save(csrf_token) {
+function save(csrf_token, file_name) {
+    record['FileName'] = file_name;
     $.ajax({
             headers: { "X-CSRFToken": csrf_token },
             url: '/api/record',

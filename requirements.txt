@@ -1,5 +1,6 @@
 djangorestframework
 Django
+django-cleanup
 ffmpeg
 requests
 pendulum

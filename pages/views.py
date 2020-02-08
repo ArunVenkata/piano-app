@@ -1,10 +1,11 @@
 from django.views.generic import CreateView, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from pages.forms import CustomUserCreationForm
+from pages.util import render_audio
+from pages.models import Record
 from django.http import JsonResponse
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
-from pydub import AudioSegment
 
 
 class SignupView(CreateView):
@@ -21,13 +22,11 @@ class RecordAPI(APIView):
 
     permission_classes = (IsAuthenticated,)
 
-    def post(self, request):
-        data = request.data
-        base = AudioSegment.silent(duration=data['TotalTime'])
-        for i in data["Keys"].keys():
-            keyAudio = AudioSegment.from_wav('static/sounds/' + data['Keys'][i] + '.wav')
-            base = base.overlay(keyAudio, position=int(i))
-        base.export('media/new.wav', format='wav')
+    @staticmethod
+    def post(request):
+        path = render_audio(request.data)
+        record = Record(audio=path, name=request.data['FileName'], user=request.user)
+        record.save()
         return JsonResponse({
             'status': 'done'
         })
