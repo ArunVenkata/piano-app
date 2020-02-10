@@ -46,7 +46,6 @@ h2 {
     font-size: 24px;
     font-style: italic;
     font-weight: 400;
-    margin: 0 0 30px;
 }
 
 .nowplaying {
@@ -65,7 +64,7 @@ h2 {
     height: 350px;
     max-width: 880px;
     position: relative;
-    margin: 40px auto 0;
+    margin: 1em auto 0;
 }
 
 .key {

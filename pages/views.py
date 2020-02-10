@@ -38,5 +38,5 @@ class RecordAPI(APIView):
         record = Record(audio=path, name=request.data['FileName'], user=request.user)
         record.save()
         return JsonResponse({
-            'status': 'done'
+            'url': path
         })

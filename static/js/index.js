@@ -2,7 +2,7 @@ const keys = document.querySelectorAll(".key"),
     note = document.querySelector(".nowplaying"),
     hints = document.querySelectorAll(".hints");
 var map = {}; // You could also use an array
-onkeydown = onkeyup = function(e) {
+onkeydown = onkeyup = function (e) {
     e = e || event; // to deal with IE
     map[e.keyCode] = e.type == 'keydown';
     /* insert conditional here */
@@ -11,35 +11,42 @@ onkeydown = onkeyup = function(e) {
 var record = {}, startRecordingTime, isRecording = false; //Recording Variables
 
 function startRecording() {
-    record = {'Keys':{}}, isRecording = true;
+    document.querySelector("#start-record").play();
+    record = {'Keys': {}}, isRecording = true;
     startRecordingTime = Date.now();
 }
 
 function stopRecording() {
-    record.TotalTime = Date.now() - startRecordingTime;
-    isRecording = false;
     console.log(record);
+    if (!$.isEmptyObject(record)) {
+        document.querySelector("#stop-record").play();
+
+        record.TotalTime = Date.now() - startRecordingTime;
+        isRecording = false;
+        $("#save").removeClass("hidden");
+        console.log(record);
+    }
 }
 
-function save(csrf_token, file_name) {
-    record['FileName'] = file_name;
+function save() {
+
+    record['FileName'] = $("#filename").val();
     $.ajax({
-            headers: { "X-CSRFToken": csrf_token },
-            url: '/api/record',
-            type: 'post',
-            dataType: 'json',
-            contentType: 'application/json',
-            success: function (data) {
-                console.log(data)
-            },
-            data: JSON.stringify(record),
-        });
+        headers: {"X-CSRFToken": $("#csrf").val()},
+        url: '/api/record',
+        type: 'post',
+        dataType: 'json',
+        contentType: 'application/json',
+        success: function (data) {
+            console.log(data);
+        },
+        data: JSON.stringify(record),
+    });
 }
 
 function playNote(e) {
     const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`),
         key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
-
     //Record sound File with time
     if (isRecording) record['Keys'][Date.now() - startRecordingTime] = audio.dataset.audio;
 

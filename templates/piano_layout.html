@@ -5,16 +5,44 @@
 
 
 {% block user_main_piano %}
-    <button onclick="startRecording();">Record</button>
-    <button onclick="stopRecording();">Stop</button>
-    <button onclick="save('{{ csrf_token }}', 'myfile');">Save</button>
-    <section id="wrap">1
+    <section id="wrap">
+
+        <div class="modal fade" id="download-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Download File</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="filename" class="col-form-label">File Name:</label>
+                                <input type="text" class="form-control" placeholder="Enter filename" id="filename">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" onclick="save();" >Download</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <header>
             <h1>Piano</h1>
             <h2>Use your keyboard. Hover for hints.</h2>
         </header>
         <section id="main">
             <div class="nowplaying"></div>
+            <div class="bg-white rounded record-frame">
+                <button class="btn btn-outline-success" onclick="startRecording();">Record</button>
+                <button class="btn btn-outline-danger" onclick="stopRecording();">Stop</button>
+                <button class="btn btn-outline-dark hidden" id="save" data-toggle="modal" data-target="#download-modal" >Save</button>
+            </div>
             <div class="keys">
                 <div data-key="65" class="key" data-note="C">
                     <span class="hints">A</span>
@@ -86,6 +114,9 @@
             <audio data-key="76" data-audio="54" src="{{ static('sounds/54.wav')}}"></audio>
             <audio data-key="80" data-audio="55" src="{{ static('sounds/55.wav')}}"></audio>
             <audio data-key="186" data-audio="56" src="{{ static('sounds/56.wav')}}"></audio>
+            <audio id="start-record" src="{{ static('sounds/start_sound.mp3')}}"></audio>
+            <audio id="stop-record" src="{{ static('sounds/stop_sound.mp3')}}"></audio>
+            <input type="hidden" id="csrf" value="{{ csrf_token }}">
         </section>
     </section>
 
