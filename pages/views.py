@@ -1,4 +1,4 @@
-from django.views.generic import CreateView, View, TemplateView
+from django.views.generic import CreateView, View, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect, render
 from pages.forms import CustomUserCreationForm
@@ -25,8 +25,12 @@ class HomeView(View):
             return render(request, 'index.html')
 
 
-class PianoView(LoginRequiredMixin, TemplateView):
-    template_name = 'piano_layout.html'
+class RecordingList(LoginRequiredMixin, ListView):
+    template_name = 'recordings.html'
+    context_object_name = 'recordings'
+
+    def get_queryset(self):
+        return Record.objects.filter(user=self.request.user)
 
 
 class RecordAPI(APIView):
@@ -38,5 +42,5 @@ class RecordAPI(APIView):
         record = Record(audio=path, name=request.data['FileName'], user=request.user)
         record.save()
         return JsonResponse({
-            'status': 'done'
+            'status': path
         })
