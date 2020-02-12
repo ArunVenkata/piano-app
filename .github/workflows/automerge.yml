@@ -11,7 +11,7 @@ jobs:
       - name: automerge
         uses: "pascalgn/automerge-action@ecb16453ce68e85b1e23596c8caa7e7499698a84"
         env:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           MERGE_LABELS: "automerge"
           MERGE_REMOVE_LABELS: "automerge"
           MERGE_COMMIT_MESSAGE: "Merged by mergebot"
