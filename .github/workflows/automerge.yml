@@ -9,11 +9,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: automerge
-        uses: "pascalgn/automerge-action@ecb16453ce68e85b1e23596c8caa7e7499698a84"
-        with:
-          args: "--trace"
+#         uses: "pascalgn/automerge-action@ecb16453ce68e85b1e23596c8caa7e7499698a84"
+#         with:
+#           args: "--trace"
+        run: "echo $GITHUB_TOKEN"
         env:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          GITHUB_TOKEN: ${{ github.token }}
           MERGE_LABELS: "automerge"
           MERGE_REMOVE_LABELS: "automerge"
           MERGE_COMMIT_MESSAGE: "Merged by mergebot"
