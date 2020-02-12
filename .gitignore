@@ -3,3 +3,4 @@ venv/
 settings.json
 db.sqlite3
 !media/recordings/1581181789.wav
+media/
