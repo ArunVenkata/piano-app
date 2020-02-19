@@ -1,0 +1,7 @@
+**/*.pyc
+.git
+.gitignore
+**/venv
+*.sqlite3
+**/*.wav
+!media/recordings/1581181789.wav
