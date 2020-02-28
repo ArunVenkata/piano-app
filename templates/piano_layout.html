@@ -1,10 +1,10 @@
 {% extends "index.html" %}
-{% block user_main_head_content %}
+{% block main_head_content %}
     <link rel="stylesheet" href="{{ static('css/styles.css') }}">
 {% endblock %}
 
 
-{% block user_main_piano %}
+{% block main_content %}
     <section id="wrap">
 
         <div class="modal fade" id="download-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -27,7 +27,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" onclick="save();" >Download</button>
+                        <button type="button" class="btn btn-primary" onclick="save();">Save</button>
                     </div>
                 </div>
             </div>
@@ -41,7 +41,7 @@
             <div class="bg-white rounded record-frame">
                 <button class="btn btn-outline-success" onclick="startRecording();">Record</button>
                 <button class="btn btn-outline-danger" onclick="stopRecording();">Stop</button>
-                <button class="btn btn-outline-dark hidden" id="save" data-toggle="modal" data-target="#download-modal" >Save</button>
+                <button class="btn btn-outline-dark hidden" id="save" onclick="modal_function();">Save</button>
             </div>
             <div class="keys">
                 <div data-key="65" class="key" data-note="C">
@@ -122,6 +122,18 @@
 
 {% endblock %}
 
-{% block user_main_body_scripts %}
+{% block main_body_scripts %}
     <script src="{{ static('js/index.js') }}"></script>
+
+    <script>
+    var isSaving = false;
+        function modal_function() {
+            $(".modal").modal();
+            isSaving = true;
+        }
+
+        $(".modal").on("hidden.bs.modal", function () {
+            isSaving = false;
+        });
+    </script>
 {% endblock %}

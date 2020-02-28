@@ -39,6 +39,8 @@ function save() {
         contentType: 'application/json',
         success: function (data) {
             console.log(data);
+            $("#download-modal").modal("hide");
+            $("#save").addClass("hidden");
         },
         data: JSON.stringify(record),
     });
@@ -51,7 +53,7 @@ function playNote(e) {
     if (isRecording) record['Keys'][Date.now() - startRecordingTime] = audio.dataset.audio;
 
     if (!key) return;
-
+    if(isSaving) return;
     const keyNote = key.getAttribute("data-note");
 
     key.classList.add("playing");

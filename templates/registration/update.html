@@ -1,0 +1,74 @@
+{% extends "index.html" %}
+
+{% block main_head_content %}
+
+    <title>Signup</title>
+{% endblock %}
+{% block signup_styles %}
+    .update-frame{
+    width: 100%;
+    padding: 2em;
+    }
+    hr{
+    height: .02em;
+    background: #ffffff;
+    }
+    input{
+    width: 12em!Important;
+    text-align: center;
+    }
+    .form-text{
+        color: #ffffff;
+        font-family: 'Raleway', sans-serif;
+        font-size: 1.275em;
+        font-weight: 100;
+    }
+    .update-save{
+        background: #FFFFFF;
+        border: .1em solid #6202EE;
+        height: 2em;
+        width:  5em;
+        box-shadow: 0px .2em .2em rgba(0, 0, 0, 0.25);
+        border-radius: .3em;
+    }
+    span{
+        color: #6202EE;
+        font-family: 'Raleway', sans-serif;
+        font-size: 1em;
+        font-weight: 700;
+    }
+{% endblock %}
+</head>
+<body>
+{% block main_content %}
+    <div class="update-frame">
+        <h1 style="color: #ffffff; font-family: 'Raleway', sans-serif; font-size: 2em; font-weight: 400;">Update
+            Details</h1>
+        <hr>
+        <form action="" method="post">
+            <div class="form-group">
+                <div class="form-row mt-2">
+                    <div class="ml-3 form-text mr-5">Name: </div>
+                    <input placeholder="Toship" class="form-control" type="text" disabled>
+                </div>
+                <div class="form-row mt-2">
+                    <div class="ml-3 form-text mr-5">Email: </div>
+                    <input placeholder="toship@toship.com" class="form-control" type="text" disabled>
+                </div>
+                <div class="form-row mt-2">
+                    <div class="ml-3 form-text mr-5">Current Password: </div>
+                    <input placeholder="Current password" class="form-control" type="text" >
+                </div>
+                <div class="form-row mt-2">
+                    <div class="ml-3 form-text mr-5">New Password: </div>
+                    <input placeholder="New Password" class="form-control" type="text" >
+                </div>
+            </div>
+            <button class="update-save"><span>Save</span></button>
+            <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+            {{ form }}
+
+        </form>
+
+    </div>
+{% endblock %}

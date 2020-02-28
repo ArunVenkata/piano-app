@@ -1,10 +1,87 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>My Recordinds</title>
-</head>
-<body>
-    {{ recordings }}
-</body>
-</html>
+{% extends "index.html" %}
+{% block main_head_content %}
+    <link rel="stylesheet" href="{{ static('css/styles.css') }}">
+    <style>
+        html {
+            height: 100%;
+        }
+
+        .recording-inner {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            padding: .5em;
+            align-items: center;
+        }
+
+        .recordings-frame {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .card {
+            margin-top: 1.475em;
+            width: calc(100% - 16em);
+        }
+
+        .shadow {
+            box-shadow: .2em .1em 1em #6a6a6a;
+
+        }
+
+        .download-btn {
+            height: 2.5em;
+        }
+    </style>
+{% endblock %}
+
+
+{% block main_content %}
+    <div class="recordings-frame">
+        {%  if not recordings %}
+            <div class="card shadow">
+                <div class="recording-inner">
+                    <div class="card-body" style="width: 16em; text-align: center;">
+                        NO RECORDINGS
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        {% for recording in recordings %}
+            <div class="card shadow">
+                <div class="recording-inner">
+                    <audio id="aud_{{ recording.id }}" controls controlsList="nodownload"
+                           src="/download/{{ recording.id }}">
+                        Your browser does not support the HTML5 audio element.
+                    </audio>
+                    <div class="card-body" id="description_{{ recording.id }}" style="width: 16em; text-align: center;">
+                        {{ recording.name }}
+                    </div>
+                    <a href="/download/{{ recording.id }}" download="{{ recording.name }}">
+                        <button class="btn btn-success download-btn">Download</button>
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block main_body_scripts %}
+    <script>
+        $(document).ready(function (e) {
+            let arr = $("audio");
+            let desc = $('div')
+                .filter(function () {
+                    return this.id.match(/description_*/g);
+                });
+            console.log(desc);
+            for (let i = 0; i < arr.length; i++) {
+                let x = $(desc[i]).text();
+                arr[i].onloadedmetadata = function () {
+                $(desc[i]).text(x + " - ("+  Number.parseInt(this.duration)+"secs)");
+                };
+            }
+        });
+    </script>
+{% endblock %}

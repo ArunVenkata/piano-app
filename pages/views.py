@@ -1,4 +1,4 @@
-from django.views.generic import CreateView, View, ListView
+from django.views.generic import CreateView, View, ListView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect, render, HttpResponse
 from pages.forms import CustomUserCreationForm
@@ -8,6 +8,7 @@ from pages.models import Record
 from django.http import JsonResponse
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
+from django.contrib.auth.models import User
 
 
 class SignupView(CreateView):
@@ -23,6 +24,18 @@ class HomeView(View):
             return redirect('piano')
         else:
             return render(request, 'index.html')
+
+def download(request):
+    file = open('media/test.mp3', 'rb').read()
+    response = HttpResponse(file)
+    response['Content-Disposition'] = 'attachment; filename=test.mp3'
+    return response
+
+
+class UserUpdateView(LoginRequiredMixin, UpdateView):
+    model = User
+    form_class = CustomUserCreationForm
+    template_name = 'registration/update.html'
 
 
 class RecordingList(LoginRequiredMixin, ListView):
