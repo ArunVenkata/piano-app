@@ -4,24 +4,30 @@ const keys = document.querySelectorAll(".key"),
 var map = {}; // You could also use an array
 onkeydown = onkeyup = function (e) {
     e = e || event; // to deal with IE
-    map[e.keyCode] = e.type == 'keydown';
+    map[e.keyCode] = e.type === 'keydown';
     /* insert conditional here */
-}
+};
 
 var record = {}, startRecordingTime, isRecording = false; //Recording Variables
+var mediaRecorder;
 
 function startRecording() {
-    document.querySelector("#start-record").play();
+    var startRecordingAudio = document.querySelector("#start-record");
+    startRecordingAudio.addEventListener("ended", function () {
+        startRecordingAudio.currentTime = 0;
+        mediaRecorder.start();
+        startRecordingTime = Date.now();
+    });
+    startRecordingAudio.play();
     record = {'Keys': {}}, isRecording = true;
-    startRecordingTime = Date.now();
 }
 
 function stopRecording() {
     console.log(record);
     if (!$.isEmptyObject(record)) {
-        document.querySelector("#stop-record").play();
-
+        mediaRecorder.stop();
         record.TotalTime = Date.now() - startRecordingTime;
+        document.querySelector("#stop-record").play();
         isRecording = false;
         $("#save").removeClass("hidden");
         console.log(record);
@@ -29,8 +35,8 @@ function stopRecording() {
 }
 
 function save() {
-
     record['FileName'] = $("#filename").val();
+    record['Audio'] = mediaAudioBase64;
     $.ajax({
         headers: {"X-CSRFToken": $("#csrf").val()},
         url: '/api/record',
@@ -53,7 +59,7 @@ function playNote(e) {
     if (isRecording) record['Keys'][Date.now() - startRecordingTime] = audio.dataset.audio;
 
     if (!key) return;
-    if(isSaving) return;
+    if (isSaving) return;
     const keyNote = key.getAttribute("data-note");
 
     key.classList.add("playing");
@@ -76,3 +82,26 @@ hints.forEach(hintsOn);
 keys.forEach(key => key.addEventListener("transitionend", removeTransition));
 
 window.addEventListener("keydown", playNote);
+
+navigator.mediaDevices.getUserMedia({audio: true})
+    .then(stream => {
+        mediaRecorder = new MediaRecorder(stream);
+        var reader = new window.FileReader();
+        var audioChunks = [];
+        mediaRecorder.addEventListener("dataavailable", event => {
+            audioChunks.push(event.data);
+            console.log(mediaRecorder.audioBitsPerSecond)
+        });
+
+        mediaRecorder.addEventListener("stop", () => {
+            const audioBlob = new Blob(audioChunks, {'type': 'audio/wav'});
+            audioChunks = [];
+            reader.readAsDataURL(audioBlob);
+            reader.onloadend = function () {
+                mediaAudioBase64 = reader.result;
+                mediaAudioBase64 = mediaAudioBase64.split(',')[1];
+                console.log(mediaAudioBase64);
+            }
+        });
+
+    });

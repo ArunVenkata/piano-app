@@ -1,9 +1,12 @@
 from pydub import AudioSegment
-import time
+from io import BytesIO
+import time, base64
 
 
 def render_audio(data):
-    base = AudioSegment.silent(duration=data['TotalTime'])
+    # base = AudioSegment.silent(duration=data['TotalTime'])
+    voice = base64.b64decode(data['Audio'])
+    base = AudioSegment.from_file(BytesIO(voice))
     for i in data["Keys"].keys():
         audio = AudioSegment.from_wav('static/sounds/' + data['Keys'][i] + '.wav')
         base = base.overlay(audio, position=int(i))
