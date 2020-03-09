@@ -10,7 +10,7 @@ from django.http import JsonResponse
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth.models import User
-from datetime import datetime
+from django.utils import timezone
 
 
 class SignupView(CreateView):
@@ -38,7 +38,7 @@ def download(request):
 
 def last_logout(request):
     custom_user = CustomUser.objects.filter(user=request.user)
-    custom_user.update(last_logout=datetime.now())
+    custom_user.update(last_logout=timezone.now())
     logout(request)
     return redirect('/')
 
