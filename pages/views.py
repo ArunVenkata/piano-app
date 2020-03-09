@@ -25,6 +25,7 @@ class HomeView(View):
         else:
             return render(request, 'index.html')
 
+
 def download(request):
     file = open('media/test.mp3', 'rb').read()
     response = HttpResponse(file)
@@ -57,6 +58,18 @@ class DownloadRecordings(LoginRequiredMixin, View):
             return response
         else:
             return HttpResponse("Not Authorized")
+
+
+class DeleteRecordings(LoginRequiredMixin, View):
+
+    @staticmethod
+    def get(request, pk):
+        recording = Record.objects.filter(pk=pk).first()
+        if request.user == recording.user:
+            Record.objects.filter(pk=pk).delete()
+            return redirect('recordings')
+        else:
+            return HttpResponse('Not Authorized')
 
 
 class RecordAPI(APIView):

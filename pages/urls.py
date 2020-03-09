@@ -10,6 +10,7 @@ urlpatterns = [
     path("user-update/<int:pk>", views.UserUpdateView.as_view(), name='user-update'),
     path('recordings', views.RecordingList.as_view(), name='recordings'),
     path('download/<int:pk>', views.DownloadRecordings.as_view(), name='download'),
+    path('delete/<int:pk>', views.DeleteRecordings.as_view(), name='delete'),
     path("api/record", views.RecordAPI.as_view(), name='record'),
     path('download', views.download, name='download'),
 ]

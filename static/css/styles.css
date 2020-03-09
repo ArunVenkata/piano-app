@@ -67,6 +67,11 @@ h2 {
     margin: 1em auto 0;
 }
 
+.countdown-div {
+    display: flex;
+    justify-content: center;
+}
+
 .key {
     position: relative;
     border: 4px solid black;

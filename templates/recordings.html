@@ -58,6 +58,7 @@
                     <div class="card-body" id="description_{{ recording.id }}" style="width: 16em; text-align: center;">
                         {{ recording.name }}
                     </div>
+                    <a href="/delete/{{ recording.id }}" class="mr-3"><img style="width: 1.9em; height: 2em;" src="{{ static('images/delete.svg') }}"></a>
                     <a href="/download/{{ recording.id }}" download="{{ recording.name }}">
                         <button class="btn btn-success download-btn">Download</button>
                     </a>

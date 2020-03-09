@@ -13,10 +13,23 @@ var mediaRecorder;
 
 function startRecording() {
     var startRecordingAudio = document.querySelector("#start-record");
+    $("#piano_layout_main").addClass("hidden");
+    $("#countdown").removeClass("hidden");
+    let count = 2;
+    $("#countdown_text").text(count);
+    let interval= setInterval(function (e) {
+        count--;
+        $("#countdown_text").text(count);
+    }, 1000);
     startRecordingAudio.addEventListener("ended", function () {
         startRecordingAudio.currentTime = 0;
         mediaRecorder.start();
         startRecordingTime = Date.now();
+        $("#piano_layout_main").removeClass("hidden");
+        $("#countdown").addClass("hidden");
+
+        clearInterval(interval);
+
     });
     startRecordingAudio.play();
     record = {'Keys': {}}, isRecording = true;
@@ -56,7 +69,11 @@ function playNote(e) {
     const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`),
         key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
     //Record sound File with time
-    if (isRecording) record['Keys'][Date.now() - startRecordingTime] = audio.dataset.audio;
+    if (isRecording) {
+        console.log("RECORD UPDATE ", Date.now(), startRecordingTime, Date.now() - startRecordingTime);
+        record['Keys'][Date.now() - startRecordingTime] = audio.dataset.audio;
+
+    }
 
     if (!key) return;
     if (isSaving) return;
