@@ -1,14 +1,16 @@
 from django.views.generic import CreateView, View, ListView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth import logout
 from django.shortcuts import redirect, render, HttpResponse
 from pages.forms import CustomUserCreationForm
 from pages.util import render_audio
 from django.utils.encoding import smart_str
-from pages.models import Record
+from pages.models import Record, CustomUser
 from django.http import JsonResponse
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth.models import User
+from datetime import datetime
 
 
 class SignupView(CreateView):
@@ -21,6 +23,7 @@ class HomeView(View):
     @staticmethod
     def get(request):
         if request.user.is_authenticated:
+            print(request.user.last_login)
             return redirect('piano')
         else:
             return render(request, 'index.html')
@@ -31,6 +34,13 @@ def download(request):
     response = HttpResponse(file)
     response['Content-Disposition'] = 'attachment; filename=test.mp3'
     return response
+
+
+def last_logout(request):
+    custom_user = CustomUser.objects.filter(user=request.user)
+    custom_user.update(last_logout=datetime.now())
+    logout(request)
+    return redirect('/')
 
 
 class UserUpdateView(LoginRequiredMixin, UpdateView):
