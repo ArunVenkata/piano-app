@@ -55,6 +55,10 @@
                            src="/download/{{ recording.id }}">
                         Your browser does not support the HTML5 audio element.
                     </audio>
+                                       <a class="sr-only sr-only-focusable" href="/recordings">
+                        {{ recording.name }}
+                   </a>
+
                     <div class="card-body" id="description_{{ recording.id }}" style="width: 16em; text-align: center;">
                         {{ recording.name }}
                     </div>

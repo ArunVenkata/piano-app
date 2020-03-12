@@ -24,6 +24,18 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
+                    <div>
+                        <a class="sr-only sr-only-focusable" href="/">Hello {{ request.user.first_name }},
+                        This is an automated message which will show you how to use this web application.
+
+                        In order to navigate back an forth, you will have to use the tab key and the tab key while the
+                        shift key is pressed. In order to enable something on the website, you must first navigate to it
+                        and press the enter key. To use this website, first navigate to the record button by pressing
+                        the tab key on your keyboard and enable it. Start playing the piano using the keyboard and then
+                        navigate to the stop button to stop the recording. Then navigate to the save button to save the
+                        recording to your account.
+                        To view your recordings, navigate to the recordings link.</a>
+                    </div>
                     <div class="modal-body">
                         Hello {{ request.user.first_name }},
                         This is an automated message which will show you how to use this web application.
