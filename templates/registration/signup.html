@@ -2,48 +2,52 @@
 
 {% block main_head_content %}
 
-<title>Signup</title>
+    <title>Signup</title>
 {% endblock %}
 {% block signup_styles %}{% endblock %}
 </head>
 <body>
 {% block main_content %}
 
-<div class="card mr-auto ml-auto mb-5" style="box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">
-    <h4 class="card-title mr-auto ml-auto mt-4" style="font-family: 'Raleway', sans-serif; font-weight: 500;">
-        Welcome!
-    </h4>
-    <div class="card-body mr-auto ml-auto">
+    <div class="card mr-auto ml-auto mb-5" style="width: 45%;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    margin-top: 5%;">
+        <h4 class="card-title mr-auto ml-auto mt-4" style="font-family: 'Raleway', sans-serif; font-weight: 500;">
+            Welcome!
+        </h4>
+        <div class="card-body mr-auto ml-auto">
 
-        <form id="form-login" action="" method="post">
-            <div class="form-group">
-                <input class="form-control d-block ml-auto mr-auto mt-3 mb-3" placeholder="Username" type="text"
-                       name="username"
-                       id="id_username" required>
-                <input class="form-control d-block ml-auto mr-auto mb-3" type="email" placeholder="Email" name="email"
-                       id="id_email" maxlength="254" required>
-                <input class="form-control d-block ml-auto mr-auto mb-3" type="text" placeholder="First Name"
-                       name="first_name" id="id_first_name" required>
-                <input class="form-control d-block ml-auto mr-auto mb-3" type="text" placeholder="Last Name"
-                       name="last_name" id="id_last_name" required>
-                <input class="form-control d-block ml-auto mr-auto mb-3" type="text" placeholder="Password"
-                       name="password1" id="id_password1" required>
-                <input class="form-control d-block ml-auto mr-auto mb-3" type="text" placeholder="Confirm Password"
-                       name="password2" id="id_password2" required>
+            <form id="form-login" action="" method="post">
+                <div class="form-group">
+                    <input class="form-control d-block ml-auto mr-auto mt-3 mb-3" placeholder="Username" type="text"
+                           name="username"
+                           id="id_username" required>
+                    <input class="form-control d-block ml-auto mr-auto mb-3" type="email" placeholder="Email"
+                           name="email"
+                           id="id_email" maxlength="254" required>
+                    <input class="form-control d-block ml-auto mr-auto mb-3" type="text" placeholder="First Name"
+                           name="first_name" id="id_first_name" required>
+                    <input class="form-control d-block ml-auto mr-auto mb-3" type="text" placeholder="Last Name"
+                           name="last_name" id="id_last_name" required>
+                    <input class="form-control d-block ml-auto mr-auto mb-3" type="text" placeholder="Password"
+                           name="password1" id="id_password1" required>
+                    <input class="form-control d-block ml-auto mr-auto mb-3" type="text" placeholder="Confirm Password"
+                           name="password2" id="id_password2" required>
 
-                <input class="btn btn-primary d-block ml-auto mr-auto mb-3" type="submit" value="Sign Up">
-                {% if form.errors.items() %}
+                    <input class="btn btn-primary d-block ml-auto mr-auto mb-3" type="submit" value="Sign Up">
+                    {% if form.errors.items() %}
                         {% for err in form.errors.values() %}
-                             {{ err }}
+                            <a class="sr-only sr-only-focusable" href="/signup">{{ err }}</a>
+                            {{ err }}
                         {% endfor %}
 
-                {% endif %}
-            </div>
-            <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
-            {#        {{ form}}#}
+                    {% endif %}
+                </div>
+                <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+                {#        {{ form}}#}
 
-        </form>
+            </form>
 
+        </div>
     </div>
-</div>
 {% endblock %}

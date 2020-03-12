@@ -2,11 +2,47 @@
 {% block main_head_content %}
     <link rel="stylesheet" href="{{ static('css/styles.css') }}">
 {% endblock %}
+{% block signup_styles %}
 
+    .tutorial{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    }
+
+{% endblock %}
 
 {% block main_content %}
     <section id="wrap">
+        <div class="modal fade" id="tutorial-modal" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Welcome to the sound of music!</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Hello {{ request.user.first_name }},
+                        This is an automated message which will show you how to use this web application.
 
+                        In order to navigate back an forth, you will have to use the tab key and the tab key while the
+                        shift key is pressed. In order to enable something on the website, you must first navigate to it
+                        and press the enter key. To use this website, first navigate to the record button by pressing
+                        the tab key on your keyboard and enable it. Start playing the piano using the keyboard and then
+                        navigate to the stop button to stop the recording. Then navigate to the save button to save the
+                        recording to your account.
+                        To view your recordings, navigate to the recordings link.
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="modal fade" id="download-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
              aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -33,6 +69,9 @@
             </div>
         </div>
         <header>
+            <div class="tutorial">
+                <button class="btn btn-warning mr-4" tabindex="0" onclick="$('#tutorial-modal').modal()">Tutorial</button>
+            </div>
             <h1>Piano</h1>
             <h2>Use your keyboard. Hover for hints.</h2>
         </header>
@@ -45,7 +84,7 @@
             </div>
             <div class="keys">
                 <div id="countdown" class="keys countdown-div hidden"><h1 id="countdown_text">HSHSHHS</h1></div>
-                <div id="piano_layout_main" class="keys" >
+                <div id="piano_layout_main" class="keys">
 
                     <div data-key="65" class="key" data-note="C">
                         <span class="hints">A</span>
@@ -139,5 +178,8 @@
         $(".modal").on("hidden.bs.modal", function () {
             isSaving = false;
         });
+        {% if not g.bool(request.user.customuser.last_logout) %}
+            $("#tutorial-modal").modal();
+        {% endif %}
     </script>
 {% endblock %}

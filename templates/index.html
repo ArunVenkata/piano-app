@@ -113,7 +113,6 @@
 
 </head>
 <body>
-
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="/">
         <img src="{{ static('images/headphones.svg') }}" width="45" height="45" class="d-inline-block" alt="">
@@ -127,10 +126,14 @@
         </div>
         <div class="navbar-nav right-nav">
             {% if request.user.is_authenticated %}
+
+                <span class="nav-item" style="padding: .5rem 1rem;">
+                    <a class="sr-only sr-only-focusable" href="/app">Hello, {{ request.user.first_name }}</a>
+                </span>
                 <span class="nav-item" style="padding: .5rem 1rem;">Hello, {{ request.user.username }}</span>
                 <a class="nav-item nav-link" href="/recordings" style="padding: .5rem 1rem;">Recordings</a>
 
-                <a class="nav-item nav-link" href="/logout"><span id="nav-login">Logout</span></a>
+                <a class="nav-item nav-link" href="/logout/"><span id="nav-login">Logout</span></a>
             {% else %}
                 <a class="nav-item nav-link" href="/login"><span id="nav-login">Login</span></a>
                 <a class="nav-item nav-link" id="nav-link-signup" href="/signup">Sign Up</a>

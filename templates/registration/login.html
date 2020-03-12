@@ -17,6 +17,8 @@
             {% if form.errors.items() %}
                 <ul class="d-block ml-auto mr-auto p-0">
                 {% for err in form.errors.values() %}
+                     <a class="sr-only sr-only-focusable" href="/login"><li class="list-inline-item">{{ err.as_text()}}</li></a>
+
                     <li class="list-inline-item">{{ err.as_text()}}</li>
                 {% endfor %}
                 </ul>
@@ -24,7 +26,6 @@
             </div>
 
             <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
-            {#        {{ form}}#}
 
         </form>
 
