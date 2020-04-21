@@ -27,7 +27,7 @@
 
                     <div class="modal-body">
                         <div>
-                            <a class="sr-only sr-only-focusable" href="/">Hello {{ request.user.first_name }},
+                            <a class="sr-only sr-only-focusable" href="#">Hello {{ request.user.first_name }},
                                 This is an automated message which will show you how to use this web application.
 
                                 In order to navigate back an forth, you will have to use the tab key and the tab key
@@ -190,11 +190,11 @@
         var isSaving = false;
 
         function modal_function() {
-            $(".modal").modal();
+            $("#download-modal").modal();
             isSaving = true;
         }
 
-        $(".modal").on("hidden.bs.modal", function () {
+        $("#download-modal").on("hidden.bs.modal", function () {
             isSaving = false;
         });
         {% if not g.bool(request.user.customuser.last_logout) %}

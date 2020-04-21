@@ -39,11 +39,14 @@
 
 {% block main_content %}
     <div class="recordings-frame">
-        {%  if not recordings %}
+        {% if not recordings %}
             <div class="card shadow">
                 <div class="recording-inner">
                     <div class="card-body" style="width: 16em; text-align: center;">
                         NO RECORDINGS
+                        <a class="sr-only sr-only-focusable" href="#">
+                            NO RECORDINGS
+                        </a>
                     </div>
                 </div>
             </div>
@@ -51,13 +54,14 @@
         {% for recording in recordings %}
             <div class="card shadow">
                 <div class="recording-inner">
+                    <a class="sr-only sr-only-focusable" href="/recordings">
+                        {{ recording.name }}
+                   </a>
                     <audio id="aud_{{ recording.id }}" controls controlsList="nodownload"
                            src="/download/{{ recording.id }}">
                         Your browser does not support the HTML5 audio element.
                     </audio>
-                                       <a class="sr-only sr-only-focusable" href="/recordings">
-                        {{ recording.name }}
-                   </a>
+
 
                     <div class="card-body" id="description_{{ recording.id }}" style="width: 16em; text-align: center;">
                         {{ recording.name }}
@@ -84,7 +88,7 @@
             for (let i = 0; i < arr.length; i++) {
                 let x = $(desc[i]).text();
                 arr[i].onloadedmetadata = function () {
-                $(desc[i]).text(x + " - ("+  Number.parseInt(this.duration)+"secs)");
+                    $(desc[i]).text(x + " - (" + Number.parseInt(this.duration) + "secs)");
                 };
             }
         });

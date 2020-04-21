@@ -128,7 +128,7 @@
             {% if request.user.is_authenticated %}
 
                 <span class="nav-item" style="padding: .5rem 1rem;">
-                    <a class="sr-only sr-only-focusable" href="/app">Hello, {{ request.user.first_name }}</a>
+                    <a class="sr-only sr-only-focusable" href="#">Hello, {{ request.user.first_name }}</a>
                 </span>
                 <span class="nav-item" style="padding: .5rem 1rem;">Hello, {{ request.user.username }}</span>
                 <a class="nav-item nav-link" href="/recordings" style="padding: .5rem 1rem;">Recordings</a>
